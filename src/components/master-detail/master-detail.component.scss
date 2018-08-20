@@ -1,0 +1,74 @@
+.fullscreen {
+  width: 100%;
+}
+
+:host {
+  /deep/ .master-detail-container.compact .ngx-datatable {
+    .datatable-body {
+      .datatable-row-wrapper {
+        position: relative;
+        cursor: pointer;
+      }
+    }
+
+    .datatable-footer {
+      .datatable-footer-inner {
+        height: auto !important;
+        display: block;
+        padding: 2px 0;
+
+        .page-count {
+          height: 2.8em;
+          line-height: 2.8em;
+        }
+      }
+    }
+  }
+
+  /deep/ .ngx-datatable .datatable-body {
+    .datatable-row-wrapper {
+      position: relative;
+      cursor: pointer;
+    }
+  }
+}
+
+.expand-row-link {
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 32px;
+  text-decoration: none;
+}
+
+.input-group.search {
+  position: relative;
+
+  .form-control {
+    padding: 0.75rem 1.125rem 0.75rem 3.8rem;
+  }
+
+  &::before {
+    content: "\f4a5";
+    font-family: "Ionicons";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-rendering: auto;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.7rem;
+    line-height: calc(2.25rem + 2px);
+    position: absolute;
+    z-index: 100;
+    left: 1rem;
+    top: 2px;
+  }
+}
+
+.master-detail-container {
+}

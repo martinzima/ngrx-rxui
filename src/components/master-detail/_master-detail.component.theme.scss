@@ -1,0 +1,9 @@
+@include nb-install-component() {
+  /deep/ .master-detail-container.compact .ngx-datatable {
+    .datatable-body {
+      .datatable-row-wrapper {
+        /*border-top: 1px solid nb-theme(card-separator);*/
+      }
+    }
+  }
+}

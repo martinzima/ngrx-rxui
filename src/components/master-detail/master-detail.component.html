@@ -1,0 +1,48 @@
+<div class="row master-detail-container" [class.compact]="isCompactListMode$ | async">
+    <div class="d-md-block col-12" [class.d-none]="isDetailShown" [class.col-md-3]="isDetailShown">
+        <nb-card>
+            <ng-content select="[card-header]"></ng-content>
+
+            <ng-container>
+                <nb-card-body class="table-section control-section" *ngIf="isSearchEnabled">
+                    <div class="row">                    
+                        <!--<div class="col master-list-options">   
+                            <ng-content select="[master-list-options]"></ng-content>                                             
+                        </div>-->
+                        <div class="col-12 master-search" [class.col-md-4]="!(isCompactListMode$ | async)" *ngIf="isSearchEnabled">
+                            <div class="input-group full-width search">
+                                <input #search type="text" class="full-width search" placeholder=""Search..." (input)="doSearchFulltextChanged(search.value)"
+                                    [value]="searchFulltext">
+                            </div>                    
+                        </div>
+                        <!--<div class="col-auto master-buttons">                        
+                            <ng-content select="[master-buttons]"></ng-content>
+                        </div>-->
+                    </div>
+                </nb-card-body>
+    
+                <nb-card-body class="table-section list-section">
+                    <ngx-datatable-column [width]="58" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false"
+                        #compactExpandColumn>
+                        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                            <a href="#" class="expand-row-link" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" (click)="false"></a>
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <rv-datatable #rvDatatable [state]="listState" (requestRows)="doRequestRows()" (select)="doSelectRow($event)" 
+                        (activate)="doActivateRow($event)" [columnMode]="columnMode"
+                        [headerHeight]="(isCompactListMode$ | async) ? 0 : 50" [scrollbarH]="!(isCompactListMode$ | async)"
+                        [externalColumnTemplates]="columnTemplates$ | async" [rowClass]="rowClass"
+                        [rows]="rows"
+                        [scrollbarV]="false"> <!-- [scrollbarV]="false" to fix weird bug: Cannot read property 'removeEventListener' of undefined in ScrollerComponent.ngOnDestroy -->
+                    </rv-datatable>
+                </nb-card-body>
+            </ng-container>
+        </nb-card>
+    </div>
+
+    <div *ngIf="isDetailShown" class="col-12 col-md-9 detail-container">
+        <ng-container *ngTemplateOutlet="detailViewTemplate; context: {}">
+        </ng-container>
+    </div>
+</div>

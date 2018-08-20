@@ -1,0 +1,26 @@
+<ng-select *ngIf="formControlState"
+           [items]="listState.value"
+           [bindLabel]="bindLabel"
+           [bindValue]="bindValue"
+           [clearable]="clearable"
+           [placeholder]="placeholder"
+           [multiple]="multiple"
+           [typeahead]="typeahead"
+           [placeholder]="placeholder"
+           [ngrxFormControlState]="safeFormControlState"
+           appendTo="body">
+</ng-select>
+
+<ng-select *ngIf="!formControlState"
+           [items]="listState.value"
+           [bindLabel]="bindLabel"
+           [bindValue]="bindValue"
+           [clearable]="clearable"
+           [placeholder]="placeholder"
+           [multiple]="multiple"
+           [typeahead]="typeahead"
+           [placeholder]="placeholder"
+           [ngModel]="value"
+           (change)="doChange($event)"
+           appendTo="body">
+</ng-select>

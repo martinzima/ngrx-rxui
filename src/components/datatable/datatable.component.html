@@ -1,0 +1,9 @@
+<ngx-datatable #ngxDatatable class="material-revo fullscreen" [rows]="rows != null ? rows : state.value" [headerHeight]="headerHeight"
+    [footerHeight]="footerHeight" [rowHeight]="rowHeight" [columnMode]="columnMode" [count]="state.totalCount" [externalPaging]="true"
+    [externalSorting]="true" [offset]="state.search.page" [limit]="state.search.itemsPerPage" (page)="pageSet($event); scrollTo(ngxDatatable);" (sort)="sortSet($event)"
+    [loadingIndicator]="state.isLoading" [selectionType]="'checkbox'" (select)="doSelect($event)" (activate)="doActivate($event)"
+    [rowIdentity]="getRowIdentityFunc()" [selected]="selected" [scrollbarH]="scrollbarH" [scrollbarV]="scrollbarV"
+    [rowClass]="rowClass">
+</ngx-datatable>
+
+<ng-content></ng-content>
