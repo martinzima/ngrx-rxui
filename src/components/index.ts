@@ -1,7 +1,7 @@
-export * from './breadcrumb-nav/breadcrumb';
-export * from './breadcrumb-nav/breadcrumb-nav.component';
-export * from './datatable/datatable.component';
-export * from './master-detail/master-detail.component';
-export * from './master-detail/compact-columns.directive';
-export * from './master-detail/detail-view.directive';
-export * from './master-detail/full-columns.directive';
+// start:ng42.barrel
+export * from './breadcrumb-nav';
+export * from './datatable';
+export * from './lookup-select';
+export * from './master-detail';
+// end:ng42.barrel
+

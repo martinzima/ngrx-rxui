@@ -1,9 +1,22 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FulltextListSearch, ListState, LoadListAction, ModifyListSearchAction } from '@zima/ngrx-state-utils';
 import { FormControlState } from 'ngrx-forms';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+
+import {
+  NgFooterTemplateDirective,
+  NgHeaderTemplateDirective,
+  NgLabelTemplateDirective,
+  NgLoadingTextTemplateDirective,
+  NgMultiLabelTemplateDirective,
+  NgNotFoundTemplateDirective,
+  NgOptgroupTemplateDirective,
+  NgOptionTemplateDirective,
+  NgTagTemplateDirective,
+  NgTypeToSearchTemplateDirective,
+} from './ng-templates.directive';
 
 @Component({
   selector: 'rv-lookup-select',
@@ -31,34 +44,51 @@ export class LookupSelectComponent {
         }
       });
   }
+
+  //duplicating from internal ng-select
+  @ContentChild(NgOptionTemplateDirective, { read: TemplateRef }) optionTemplate: TemplateRef<any>;
+  @ContentChild(NgOptgroupTemplateDirective, { read: TemplateRef }) optgroupTemplate: TemplateRef<any>;
+  @ContentChild(NgLabelTemplateDirective, { read: TemplateRef }) labelTemplate: TemplateRef<any>;
+  @ContentChild(NgMultiLabelTemplateDirective, { read: TemplateRef }) multiLabelTemplate: TemplateRef<any>;
+  @ContentChild(NgHeaderTemplateDirective, { read: TemplateRef }) headerTemplate: TemplateRef<any>;
+  @ContentChild(NgFooterTemplateDirective, { read: TemplateRef }) footerTemplate: TemplateRef<any>;
+  @ContentChild(NgNotFoundTemplateDirective, { read: TemplateRef }) notFoundTemplate: TemplateRef<any>;
+  @ContentChild(NgTypeToSearchTemplateDirective, { read: TemplateRef }) typeToSearchTemplate: TemplateRef<any>;
+  @ContentChild(NgLoadingTextTemplateDirective, { read: TemplateRef }) loadingTextTemplate: TemplateRef<any>;
+  @ContentChild(NgTagTemplateDirective, { read: TemplateRef }) tagTemplate: TemplateRef<any>;
   
-  get safeFormControlState(): FormControlState<any> {
-    if (!this._safeFormControlState && this.formControlState) {
-      this._safeFormControlState = {
-        ...this.formControlState,
-        value: this.multiple && !this.formControlState.value ? '[]' : this.formControlState.value
-      }
-    }
-
-    return this._safeFormControlState;
-  }
-
-  get formControlState(): FormControlState<any> {
-    return this._formControlState;
-  }
+  @Input() bindLabel: string;
+  @Input() bindValue: string;
+  @Input() clearable = true;
+  @Input() markFirst = true;
+  @Input() placeholder: string;
+  @Input() notFoundText: string;
+  @Input() typeToSearchText: string;
+  @Input() addTagText: string;
+  @Input() loadingText: string;
+  @Input() clearAllText: string;
+  @Input() dropdownPosition = 'auto';
+  @Input() appendTo: string = 'body'; //NOTE: modified default
+  @Input() closeOnSelect = true;
+  @Input() hideSelected = false;
+  @Input() selectOnTab = false;
+  @Input() maxSelectedItems: number;
+  @Input() groupBy: string | Function;
+  //@Input() groupValue: Function;
+  @Input() bufferAmount = 4;
+  @Input() virtualScroll = false;
+  @Input() selectableGroup = false;
+  //@Input() selectableGroupAsModel = true;
+  @Input() searchFn = null;
 
   // TODO refactor into a custom ngrx-forms FormViewAdapter to match the naming
   @Input() set formControlState(value: FormControlState<any>) {
-    if (this._formControlState != value) {
+    if (this._formControlState !== value) {
       this._formControlState = value;
       this._safeFormControlState = null;
     }
   }
-    
-  @Input() bindLabel: string;
-  @Input() bindValue: string;
-  @Input() clearable: boolean;
-  @Input() placeholder: string;
+  
   @Input() value: any;
 
   get multiple(): boolean {
@@ -88,6 +118,21 @@ export class LookupSelectComponent {
         this.doRequestRows();
       }
     }
+  }
+
+  get safeFormControlState(): FormControlState<any> {
+    if (!this._safeFormControlState && this.formControlState) {
+      this._safeFormControlState = {
+        ...this.formControlState,
+        value: this.multiple && !this.formControlState.value ? '[]' : this.formControlState.value
+      }
+    }
+
+    return this._safeFormControlState;
+  }
+
+  get formControlState(): FormControlState<any> {
+    return this._formControlState;
   }
 
   doChange($event) {

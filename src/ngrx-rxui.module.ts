@@ -7,6 +7,18 @@ import { RouterModule } from '@angular/router';
 import { BreadcrumbNavComponent } from './components/breadcrumb-nav/breadcrumb-nav.component';
 import { RvDatatableComponent } from './components/datatable/datatable.component';
 import { LookupSelectComponent } from './components/lookup-select/lookup-select.component';
+import {
+  NgFooterTemplateDirective,
+  NgHeaderTemplateDirective,
+  NgLabelTemplateDirective,
+  NgLoadingTextTemplateDirective,
+  NgMultiLabelTemplateDirective,
+  NgNotFoundTemplateDirective,
+  NgOptgroupTemplateDirective,
+  NgOptionTemplateDirective,
+  NgTagTemplateDirective,
+  NgTypeToSearchTemplateDirective,
+} from './components/lookup-select/ng-templates.directive';
 import { CompactColumnsDirective } from './components/master-detail/compact-columns.directive';
 import { DetailViewDirective } from './components/master-detail/detail-view.directive';
 import { FullColumnsDirective } from './components/master-detail/full-columns.directive';
@@ -26,7 +38,17 @@ export const components = [
   CompactColumnsDirective,
   FullColumnsDirective,
   DetailViewDirective,
-  LookupSelectComponent
+  LookupSelectComponent,
+  NgOptionTemplateDirective,
+  NgOptgroupTemplateDirective,
+  NgLabelTemplateDirective,
+  NgMultiLabelTemplateDirective,
+  NgHeaderTemplateDirective,
+  NgFooterTemplateDirective,
+  NgNotFoundTemplateDirective,
+  NgTypeToSearchTemplateDirective,
+  NgLoadingTextTemplateDirective,
+  NgTagTemplateDirective
 ];
 
 @NgModule({

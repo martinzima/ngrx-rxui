@@ -1,26 +1,140 @@
 <ng-select *ngIf="formControlState"
-           [items]="listState.value"
-           [bindLabel]="bindLabel"
-           [bindValue]="bindValue"
-           [clearable]="clearable"
-           [placeholder]="placeholder"
-           [multiple]="multiple"
-           [typeahead]="typeahead"
-           [placeholder]="placeholder"
-           [ngrxFormControlState]="safeFormControlState"
-           appendTo="body">
+        [items]="listState.value"
+        [multiple]="multiple"
+        [typeahead]="typeahead"
+        [ngrxFormControlState]="safeFormControlState"
+        (change)="doChange($event)"
+        
+        [bindLabel]="bindLabel"
+        [bindValue]="bindValue"
+        [clearable]="clearable"
+        [markFirst]="markFirst"
+        [placeholder]="placeholder"
+        [notFoundText]="notFoundText"
+        [typeToSearchText]="typeToSearchText"
+        [addTagText]="addTagText"
+        [loadingText]="loadingText"
+        [clearAllText]="clearAllText"
+        [dropdownPosition]="dropdownPosition"
+        [appendTo]="appendTo"
+        [closeOnSelect]="closeOnSelect"
+        [hideSelected]="hideSelected"
+        [selectOnTab]="selectOnTab"
+        [maxSelectedItems]="maxSelectedItems"
+        [groupBy]="groupBy"
+        [bufferAmount]="bufferAmount"
+        [virtualScroll]="virtualScroll"
+        [selectableGroup]="selectableGroup"
+        [searchFn]="searchFn">
+    <ng-template *ngIf="optionTemplate" ng-option-tmp let-item="item" let-item$="item$" let-index="index" let-searchTerm="searchTerm">
+        <ng-container *ngTemplateOutlet="optionTemplate; context: {item: item, item$: item$, index: index, searchTerm: searchTerm}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="optgroupTemplate" ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index" let-searchTerm="searchTerm">
+        <ng-container *ngTemplateOutlet="optgroupTemplate; context: {item: item, item$: item$, index: index, searchTerm: searchTerm}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="labelTemplate" ng-label-tmp let-item="item" let-clear="clear" let-label="label">
+        <ng-container *ngTemplateOutlet="labelTemplate; context: {item: item, clear: clear, label: label}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="multiLabelTemplate" ng-multi-label-tmp let-items="items" let-clear="clear">
+        <ng-container *ngTemplateOutlet="multiLabelTemplate; context: {items: items, clear: clear}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="headerTemplate" ng-header-tmp>
+        <ng-container *ngTemplateOutlet="headerTemplate; context: {}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="footerTemplate" ng-footer-tmp>
+        <ng-container *ngTemplateOutlet="footerTemplate; context: {}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="notFoundTemplate" ng-notfound-tmp let-searchTerm="searchTerm">
+        <ng-container *ngTemplateOutlet="notFoundTemplate; context: {searchTerm: searchTerm}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="typeToSearchTemplate" ng-typetosearch-tmp>
+        <ng-container *ngTemplateOutlet="typeToSearchTemplate; context: {}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="loadingTextTemplate" ng-loadingtext-tmp let-searchTerm="searchTerm">
+        <ng-container *ngTemplateOutlet="loadingTextTemplate; context: {searchTerm: searchTerm}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="tagTemplate" ng-tag-tmp let-searchTerm="searchTerm">
+        <ng-container *ngTemplateOutlet="tagTemplate; context: {searchTerm: searchTerm}"></ng-container>
+    </ng-template>
 </ng-select>
 
 <ng-select *ngIf="!formControlState"
-           [items]="listState.value"
-           [bindLabel]="bindLabel"
-           [bindValue]="bindValue"
-           [clearable]="clearable"
-           [placeholder]="placeholder"
-           [multiple]="multiple"
-           [typeahead]="typeahead"
-           [placeholder]="placeholder"
-           [ngModel]="value"
-           (change)="doChange($event)"
-           appendTo="body">
+        [items]="listState.value"
+        [multiple]="multiple"
+        [typeahead]="typeahead"
+        [ngModel]="value"
+        (change)="doChange($event)"
+
+        [bindLabel]="bindLabel"
+        [bindValue]="bindValue"
+        [clearable]="clearable"
+        [markFirst]="markFirst"
+        [placeholder]="placeholder"
+        [notFoundText]="notFoundText"
+        [typeToSearchText]="typeToSearchText"
+        [addTagText]="addTagText"
+        [loadingText]="loadingText"
+        [clearAllText]="clearAllText"
+        [dropdownPosition]="dropdownPosition"
+        [appendTo]="appendTo"
+        [closeOnSelect]="closeOnSelect"
+        [hideSelected]="hideSelected"
+        [selectOnTab]="selectOnTab"
+        [maxSelectedItems]="maxSelectedItems"
+        [groupBy]="groupBy"
+        [bufferAmount]="bufferAmount"
+        [virtualScroll]="virtualScroll"
+        [selectableGroup]="selectableGroup"
+        [searchFn]="searchFn">
+
+    <ng-template *ngIf="optionTemplate" ng-option-tmp let-item="item" let-item$="item$" let-index="index" let-searchTerm="searchTerm">
+        <ng-container *ngTemplateOutlet="optionTemplate; context: {item: item, item$: item$, index: index, searchTerm: searchTerm}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="optgroupTemplate" ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index" let-searchTerm="searchTerm">
+        <ng-container *ngTemplateOutlet="optgroupTemplate; context: {item: item, item$: item$, index: index, searchTerm: searchTerm}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="labelTemplate" ng-label-tmp let-item="item" let-clear="clear" let-label="label">
+        <ng-container *ngTemplateOutlet="labelTemplate; context: {item: item, clear: clear, label: label}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="multiLabelTemplate" ng-multi-label-tmp let-items="items" let-clear="clear">
+        <ng-container *ngTemplateOutlet="multiLabelTemplate; context: {items: items, clear: clear}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="headerTemplate" ng-header-tmp>
+        <ng-container *ngTemplateOutlet="headerTemplate; context: {}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="footerTemplate" ng-footer-tmp>
+        <ng-container *ngTemplateOutlet="footerTemplate; context: {}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="notFoundTemplate" ng-notfound-tmp let-searchTerm="searchTerm">
+        <ng-container *ngTemplateOutlet="notFoundTemplate; context: {searchTerm: searchTerm}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="typeToSearchTemplate" ng-typetosearch-tmp>
+        <ng-container *ngTemplateOutlet="typeToSearchTemplate; context: {}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="loadingTextTemplate" ng-loadingtext-tmp let-searchTerm="searchTerm">
+        <ng-container *ngTemplateOutlet="loadingTextTemplate; context: {searchTerm: searchTerm}"></ng-container>
+    </ng-template>
+
+    <ng-template *ngIf="tagTemplate" ng-tag-tmp let-searchTerm="searchTerm">
+        <ng-container *ngTemplateOutlet="tagTemplate; context: {searchTerm: searchTerm}"></ng-container>
+    </ng-template>
 </ng-select>
+
+
